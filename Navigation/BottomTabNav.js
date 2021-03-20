@@ -2,11 +2,11 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Chat from './Chat.js';
-import Friends from './Friends.js';
-import Add from './Add.js';
-import Notifications from './Notifications.js';
-import Home from './Home.js'
+import Chat from '../Screens/Chat.js';
+import Friends from '../Screens/Friends.js';
+import Add from '../Screens/Add.js';
+import Notifications from '../Screens/Notifications.js';
+import Home from '../Screens/Home.js'
 
 
 const Tab = createBottomTabNavigator();
