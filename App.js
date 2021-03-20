@@ -1,14 +1,22 @@
 import React from 'react';
-import Search from './Components/Search'
-import MyTabs from './Views/BottomTabNav'
-import { NavigationContainer } from '@react-navigation/native';
+import BottomTabNav from './Views/BottomTabNav';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-    );
+export default function App() {
+  let [fontsLoaded] = useFonts({
+    'ScopeOne' : require('./assets/fonts/Scope_One/ScopeOne.ttf'),
+    'DancingScript' : require('./assets/fonts/Dancing_Script/DancingScript.ttf'),
+    'OpenSans' : require('./assets/fonts/Open_Sans/OpenSans-Regular.ttf'),
+    'OpenSansLight' : require('./assets/fonts/Open_Sans/OpenSans-Light.ttf'),
+    'OpenSansBold' : require('./assets/fonts/Open_Sans/OpenSans-Bold.ttf'),
+    'OpenSansItalic' : require('./assets/fonts/Open_Sans/OpenSans-Italic.ttf'),
+
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
+
+  return <BottomTabNav/>;
 }
