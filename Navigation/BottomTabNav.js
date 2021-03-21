@@ -20,7 +20,7 @@ function BottomTabNav() {
               activeTintColor: 'white',
               inactiveTintColor: '#1A4301',
               style: {backgroundColor: '#008037'},
-              labelStyle: {fontSize: 12},
+              labelStyle: {fontSize: 11, fontFamily: 'OpenSans'},
           }}
       > 
         <Tab.Screen name="Home" component={Home} options={{
