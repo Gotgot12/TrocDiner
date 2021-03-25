@@ -15,11 +15,8 @@ class Token extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.7,
-        alignItems: 'flex-end',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
         marginLeft: 20,
+        marginBottom: 10,
     },
 
     text: {

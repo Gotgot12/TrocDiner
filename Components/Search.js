@@ -9,7 +9,7 @@ class Search extends React.Component {
         return (
             <View style={styles.main_container}>
                 <Icon name="search-outline" size={15} color="#008037"/>
-                <TextInput style={styles.textinput} placeholder="Recherche de plat"/>
+                <TextInput style={styles.textinput} placeholder={this.props.placeholder}/>
             </View>
         );
     }
@@ -17,21 +17,22 @@ class Search extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
+        marginBottom: 10,
     },
 
     textinput: {
         height: 30,
-        width: 200,
+        width: 180,
         borderColor: '#000000',
         borderWidth: 1, 
         paddingLeft: 10,
         borderRadius: 10,
         borderColor: '#008037',
         marginLeft: 5,
+        paddingRight: 5,
     }
 })
 

@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import NavigationLogSign from './Navigation/NavigationLogSign';
 
+
 export default function App() {
   let [fontsLoaded] = useFonts({
     'ScopeOne' : require('./Assets/fonts/Scope_One/ScopeOne.ttf'),
@@ -18,5 +19,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <NavigationLogSign/>;
+  return <NavigationLogSign/>
+  
 }

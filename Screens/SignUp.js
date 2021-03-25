@@ -22,7 +22,7 @@ function SignUp ({ navigation }) {
                 <TextInput style={styles.form_input} placeholder="Confirmez le !"/>
             </View>
             <View style={styles.button_container}>
-                <Button title="S'inscrire" color="#008037" />
+                <Button title="S'inscrire" color="#008037" onPress={ () => navigation.navigate('BottomTabNav') } />
             </View>
             <View style={styles.description_container}>
                 <Text style={styles.description_text}>Vous allez pouvoir  renseigner plus d'informations dans votre profil pas d'inquiétude !</Text>
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#008037',
         paddingLeft: 10,
         borderRadius: 5,
+        color: 'white',
     },
 
     button_container: {

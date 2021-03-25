@@ -18,7 +18,7 @@ function LogIn ({ navigation }) {
                 <TextInput style={styles.form_input} placeholder="Votre plus beau mot de passe"/>
             </View>
             <View style={styles.button_container}>
-                <Button title="Se connecter" color="#008037" />
+                <Button title="Se connecter" color="#008037" onPress={ () => navigation.navigate('BottomTabNav') } />
             </View>
             <View style={styles.description_container}>
                 <TouchableOpacity style={styles.touchable_container}  onPress={ () => navigation.navigate('SignUp') }>
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#008037',
         paddingLeft: 10,
         borderRadius: 5,
+        color: 'white',
     },
 
     button_container: {

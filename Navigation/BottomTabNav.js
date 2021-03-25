@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Chat from '../Screens/Chat.js';
 import Friends from '../Screens/Friends.js';
@@ -13,7 +12,6 @@ const Tab = createBottomTabNavigator();
 
 function BottomTabNav() {
   return (
-    <NavigationContainer>
       <Tab.Navigator
           initialRouteName="Home"
           tabBarOptions={{
@@ -59,7 +57,6 @@ function BottomTabNav() {
             tabBarBadge: 3, }}
         />        
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
 

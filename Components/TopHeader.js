@@ -7,7 +7,7 @@ class TopHeader extends React.Component {
     return (
       <View style={styles.main_container}>
         <View style={styles.iconSidebar_container}>
-          <Icon name="page-layout-sidebar-left" size={35} color="white" />
+          <Icon name="page-layout-sidebar-left" size={30} color="white" />
         </View>
         <View style={styles.titre_container}>
           <Text style={styles.titre_text}>
@@ -24,7 +24,6 @@ class TopHeader extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
         flexDirection: "row",
         marginTop: 20,
         paddingBottom: 10,
