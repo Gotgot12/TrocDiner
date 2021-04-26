@@ -1,35 +1,37 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Card from '../Components/Card';
 import Counter from '../Components/Counter';
 
 
 function Request ({ route, navigation }) {
-    const { prenom, nom, adresse, note, plat, dateLiv, part, details } = route.params;
-    const dateSplit = dateLiv.split(" "); 
+    const { profile } = route.params;
+    const dateSplit = profile.dateLivraison.split(" "); 
     return (
         <View style={styles.main_container}>
             <View style={styles.title_container}>
                 <Text style={styles.title_text}>Votre commande</Text>
                 <Text style={styles.token_text}>Petit rappel: Vous avez ... jetons</Text>
             </View>
-            <Card prenom={prenom} nom={nom} adresse={adresse} note={note}/>
+            <Card profile={profile} navigation={navigation}/>
             <View style={styles.recap_container}>
                 <View style={styles.infos_container}>
-                    <Text style={styles.infos_text}>{plat}</Text>
+                    <Text style={styles.infos_text}>{profile.plat}</Text>
                     <View style={styles.dateLiv}>
                         <Text style={styles.infos_text}>{dateSplit[0].split("-")[2] + "/" + dateSplit[0].split("-")[1] + "/" + dateSplit[0].split("-")[0]}</Text>
                         <Text style={styles.infos_text}>{dateSplit[1].split(":")[0] + ":" + dateSplit[1].split(":")[1]}</Text>
                     </View>
                 </View>
-                <Counter part={part}/>
-                <View>
-                    <Button title="Commander" color="#008037" />
+                <Counter part={profile.part}/>
+                <View style={{flex: 0.7, alignItems: 'center'}}>
+                    <TouchableHighlight style={styles.touchable_container}>
+                        <Text style={styles.touchable_text}>COMMANDER</Text>
+                    </TouchableHighlight>
                 </View>
             </View>
             <View style={styles.details_container}>
                 <Text style={styles.titledetails_text}>Détails de la commande :</Text>
-                <Text style={styles.lorem_text}>{details}</Text>
+                <Text style={styles.lorem_text}>{profile.detailsCommande}</Text>
             </View>
         </View>
     )
@@ -99,6 +101,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 10,
         marginBottom: 5,
+    },
+
+    touchable_container: {
+        flex: 1,
+        width: '60%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#008037',
+        borderRadius: 7,
+        marginBottom: 5,
+    },
+
+    touchable_text: {
+        color: 'white',
+        fontFamily: 'ScopeOne',
+        fontSize: 16,
     },
 
     lorem_text: {

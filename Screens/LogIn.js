@@ -1,30 +1,48 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, TouchableHighlight, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
 
 function LogIn ({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [mdp, setMdp] = useState('');
+
     return (
         <View style={styles.main_container}>
             <TopHeader/>
+                
             <View style={styles.title_container}>
                 <Text style={styles.title_text}>Connexion</Text>
             </View>
-            <View style={styles.form_container}>
-                <Text style={styles.form_text}>E-Mail</Text>
-                <TextInput style={styles.form_input} placeholder="Adresse email ISEP"/>
+
+            <View style={{flex: 2.5}}>
+                <KeyboardAvoidingView behavior="padding">
+                <View style={styles.form_container}>
+                    <Text style={styles.form_text}>E-Mail</Text>
+                    <TextInput style={styles.form_input} placeholder="Adresse email ISEP"
+                            onChangeText={email => setEmail(email)} defaultValue={email}/>
+                </View>
+
+                <View style={styles.form_container}>
+                    <Text style={styles.form_text}>Mot de passe</Text>
+                    <TextInput style={styles.form_input} placeholder="Votre plus beau mot de passe"
+                            onChangeText={mdp => setMdp(mdp)} defaultValue={mdp}
+                            secureTextEntry={true}/>
+                </View>
+
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <TouchableHighlight style={styles.touchableHome_container} activeOpacity={0.6} underlayColor='#1A4301' onPress={() => navigation.navigate('BottomTabNav')}>
+                        <Text style={styles.touchableHome_text}>SE CONNECTER</Text>
+                    </TouchableHighlight>
+                </View>
+                </KeyboardAvoidingView>
             </View>
-            <View style={styles.form_container}>
-                <Text style={styles.form_text}>Mot de passe</Text>
-                <TextInput style={styles.form_input} placeholder="Votre plus beau mot de passe"/>
-            </View>
-            <View style={styles.button_container}>
-                <Button title="Se connecter" color="#008037" onPress={ () => navigation.navigate('BottomTabNav') } />
-            </View>
+
             <View style={styles.description_container}>
-                <TouchableOpacity style={styles.touchable_container}  onPress={ () => navigation.navigate('SignUp') }>
-                    <Text style={styles.touchable_text}>Pour vous inscrire c'est par ici !</Text>
+                <TouchableOpacity style={styles.touchableSign_container} onPress={ () => navigation.navigate('SignUp') }>
+                    <Text style={styles.touchableSign_text}>Pour vous inscrire c'est par ici !</Text>
                 </TouchableOpacity>
             </View>
+
         </View>
     );
 }
@@ -66,9 +84,19 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 
-    button_container: {
-        flex: 1,
+    touchableHome_container: {
+        flex: 0.6,
+        width: '60%',
+        alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#008037',
+        borderRadius: 10,
+    },
+
+    touchableHome_text: {
+        fontFamily: 'ScopeOne',
+        color: 'white',
+        fontSize: 16,
     },
 
     description_container: {
@@ -78,11 +106,11 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
 
-    touchable_container: {
+    touchableSign_container: {
 
     },
 
-    touchable_text: {
+    touchableSign_text: {
         fontFamily: 'OpenSansItalic',
         fontSize: 14,
         textDecorationLine: 'underline',

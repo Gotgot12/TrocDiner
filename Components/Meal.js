@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView, Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import bdd from "../Assets/Data/bdd.json";
 import Token from "../Components/Token"
@@ -17,24 +17,20 @@ function Meal({ navigation }) {
             </View>
             <View style={styles.main_container}>
             {bdd.map(m => (
-                <View style={styles.eachMeal} key={m.ID}>
+                <View style={styles.eachMeal} key={m.id}>
                     <TouchableOpacity style={styles.account_container} 
-                    onPress={ () => navigation.navigate('Profile', {prenom: m.Prenom, nom: m.Nom, adresse: m.Adresse,
-                                                        dateNaissance: m.DateNaissance, email: m.Email, note: m.Notes, plat: m.Plat,
-                                                        dateLiv: m.DateLivraison, part: m.Part, details: m.DetailsCommande }) }>
+                    onPress={ () => navigation.navigate('Profile', {profile: m}) }>
                         <Icon name="account" size={35} color="black" />
-                        <Text style={styles.account_text}>{m.Prenom}</Text>
+                        <Text style={styles.account_text}>{m.prenom}</Text>
                     </TouchableOpacity>
                     <View style={styles.descriptionMeal_container}>
-                        <Text style={styles.descriptionMeal_text}>{m.Plat}</Text>
-                        <Text style={styles.descriptionMeal_text}>{m.Part} {(m.Part > 1) ? 'parts' : 'part'}</Text>
-                        <Text style={styles.descriptionMeal_text}>{m.DateLivraison.split(" ")[0]}</Text>
+                        <Text style={styles.descriptionMeal_text}>{m.plat}</Text>
+                        <Text style={styles.descriptionMeal_text}>{m.part} {(m.part > 1) ? 'parts' : 'part'}</Text>
+                        <Text style={styles.descriptionMeal_text}>{m.dateLivraison.split(" ")[0].split("-")[2] + "/" + m.dateLivraison.split(" ")[0].split("-")[1] + "/" + m.dateLivraison.split(" ")[0].split("-")[0]}</Text>
                     </View>
-                    <View style={styles.button_container}>
-                        <Button title="Commander" color="#008037" 
-                        onPress={ () => navigation.navigate('Request', {prenom: m.Prenom, nom: m.Nom, adresse: m.Adresse, note: m.Notes,
-                                                            plat: m.Plat, dateLiv: m.DateLivraison, part: m.Part, details: m.DetailsCommande}) }/>
-                    </View>
+                    <TouchableHighlight activeOpacity={0.6} underlayColor='#1A4301' style={styles.button_container} onPress={ () => navigation.navigate('Request', {profile: m}) }>
+                        <Text style={styles.button_text}>COMMANDER</Text>
+                    </TouchableHighlight>
                 </View>
             ))}
             </View>
@@ -87,10 +83,18 @@ const styles = StyleSheet.create ({
     },
 
     button_container: {
-        flex: 3,
-        alignItems: 'flex-end',
+        flex: 2.5,
+        alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 5
+        marginRight: 5,
+        backgroundColor: '#008037',
+        borderRadius: 7,
+    },
+
+    button_text: {
+        color: 'white',
+        fontFamily: 'ScopeOne',
+        fontSize: 16
     }
 })
 

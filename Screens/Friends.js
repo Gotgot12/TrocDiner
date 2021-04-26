@@ -6,11 +6,11 @@ import TopHeader from '../Components/TopHeader';
 import bdd from "../Assets/Data/bdd.json";
 
 
-function Friends() {
+function Friends({ navigation }) {
     return (
-        <ScrollView>
-            <View>
-                <TopHeader/>
+        <View>
+            <TopHeader/>
+            <ScrollView>
                 <View style={styles.main_container}>
                     <View style={styles.title_container}>
                         <Text style={styles.title_text}>Vos amis</Text>
@@ -18,14 +18,14 @@ function Friends() {
                     </View>
                     <View>
                     {bdd.map(m => (
-                        <View key={m.ID} style={{width: 350, height: 100}}>
-                            <Card prenom={m.Prenom} nom={m.Nom} adresse={m.Adresse} note={m.Notes}/>
+                        <View key={m.id} style={{width: 350, height: 100}}>
+                            <Card profile={m} navigation={navigation}/>
                         </View>
                     ))}
                     </View>
                 </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
 
     );
 }

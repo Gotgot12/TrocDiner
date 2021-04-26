@@ -5,8 +5,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 function Profile ({ route }) {
-    const { prenom, nom, adresse, dateNaissance, email, note, plat, dateLiv, part, details } = route.params;
-    const dateSplit = dateLiv.split(" "); 
+    const { profile } = route.params;
+    const dateSplit = profile.dateLivraison.split(" "); 
     return (
         <View style={styles.main_container}>
             <View style={styles.title_container}>
@@ -15,20 +15,20 @@ function Profile ({ route }) {
             <View style={styles.infoUser_container}>
                 <View style={styles.infoPerso_container}>
                     <Icon name="account" size={35} color="black" />
-                    <Text style={styles.infoPerso_text}>{prenom} {nom}</Text>
-                    <Text style={styles.infoPerso_text}>Date de naissance : {dateNaissance}</Text>
-                    <Text style={styles.infoPerso_text}>Adresse : {adresse}</Text>
-                    <Text style={styles.infoPerso_text}>E-Mail : {email}</Text>
-                    <Text style={styles.infoPerso_text}>Moyenne de ses notes : {note}</Text>
+                    <Text style={styles.infoPerso_text}>{profile.prenom} {profile.nom}</Text>
+                    <Text style={styles.infoPerso_text}>Date de naissance : {profile.dateNaissance}</Text>
+                    <Text style={styles.infoPerso_text}>Adresse : {profile.adresse}</Text>
+                    <Text style={styles.infoPerso_text}>E-Mail : {profile.email}</Text>
+                    <Text style={styles.infoPerso_text}>Moyenne de ses notes : {profile.notes}</Text>
                 </View>
                 <View style={styles.histoInfoPlat_container}>
                     <Text style={styles.histo_text}>Historique des plats :</Text>
                     <ScrollView>
                         <View style={styles.infoPlat_container}>
-                            <Text style={styles.infoPerso_text}>{plat}</Text>
+                            <Text style={styles.infoPerso_text}>{profile.plat}</Text>
                             <Text style={styles.infoPerso_text}>Le {dateSplit[0].split("-")[2] + "/" + dateSplit[0].split("-")[1] + "/" + dateSplit[0].split("-")[0]} à {dateSplit[1].split(":")[0] + "h" + dateSplit[1].split(":")[1]}</Text>
-                            <Text style={styles.infoPerso_text}>{part} {(part > 1) ? 'parts' : 'part'}</Text>
-                            <Text style={[styles.infoPerso_text,{textAlign: 'center'}]}>Détails du plat : {details}</Text>
+                            <Text style={styles.infoPerso_text}>{profile.part} {(profile.part > 1) ? 'parts' : 'part'}</Text>
+                            <Text style={[styles.infoPerso_text,{textAlign: 'center'}]}>Détails du plat : {profile.detailsCommande}</Text>
                         </View>
                     </ScrollView>
                 </View>

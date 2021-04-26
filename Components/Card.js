@@ -1,30 +1,22 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-
-class Card extends React.Component {
-    constructor(props) {
-        super(props)
-        console.log(this.props)
-    }
-
-    render() {
-        return (
-            <View style={styles.main_container}>
-                <View style={styles.account_container}>
-                    <Icon name="account" size={50} color="black" />
-                </View>
-                <View style={styles.text_container}>
-                    <View style={styles.info_container}>
-                        <Text style={styles.names_text}>{this.props.prenom} {this.props.nom}</Text>
-                        <Text style={styles.location_text}>{this.props.adresse}</Text>
-                    </View>
-                    <Text style={styles.notes_text}>Moyenne de ses notes : {this.props.note}</Text>
-                </View>
+function Card ({profile, navigation}) {
+    return (
+        <TouchableOpacity style={styles.main_container} onPress = {() => navigation.navigate('Profile', {profile:profile})}>
+            <View style={styles.account_container}>
+                <Icon name="account" size={50} color="black" />
             </View>
-        )
-    }
+            <View style={styles.text_container}>
+                <View style={styles.info_container}>
+                    <Text style={styles.names_text}>{profile.prenom} {profile.nom}</Text>
+                    <Text style={styles.location_text}>{profile.adresse}</Text>
+                </View>
+                <Text style={styles.notes_text}>Moyenne de ses notes : {profile.notes}</Text>
+            </View>
+        </TouchableOpacity>
+    )
 }
 
 const styles = StyleSheet.create({

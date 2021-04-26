@@ -1,33 +1,57 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
 
-function SignUp ({ navigation }) {
+
+function SignUp({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [mdp, setMdp] = useState('');
+    const [confMdp, setConfMdp] = useState('');
+
     return (
         <View style={styles.main_container}>
-            <TopHeader/>
+            <TopHeader />
+            <KeyboardAvoidingView behavior='position'>
+
             <View style={styles.title_container}>
                 <Text style={styles.title_text}>Inscription</Text>
             </View>
-            <View style={styles.form_container}>
-                <Text style={styles.form_text}>E-Mail</Text>
-                <TextInput style={styles.form_input} placeholder="Adresse email ISEP"/>
+
+
+            <View style={{flex: 3}}>
+                    <View style={styles.form_container}>
+                        <Text style={styles.form_text}>E-Mail</Text>
+                        <TextInput style={styles.form_input} placeholder="Adresse email ISEP" 
+                                onChangeText={email => setEmail(email)} defaultValue={email}/>
+                    </View>
+
+                    <View style={styles.form_container}>
+                        <Text style={styles.form_text}>Mot de passe</Text>
+                        <TextInput style={styles.form_input} placeholder="Votre plus beau mot de passe" 
+                                onChangeText={mdp => setMdp(mdp)} defaultValue={mdp}
+                                secureTextEntry={true}/>
+                    </View>
+
+                    <View style={styles.form_container}>
+                        <Text style={styles.form_text}>Confirmation du mot de passe</Text>
+                        <TextInput style={styles.form_input} placeholder="Confirmez le !"
+                                onChangeText={confMdp => setConfMdp(confMdp)} defaultValue={confMdp}
+                                secureTextEntry={true}/>
+                    </View>
+                    
+                    <View style={{flex: 1, alignItems: 'center'}}>
+                        <TouchableHighlight style={styles.touchableHome_container} activeOpacity={0.6} underlayColor='#1A4301' onPress={() => navigation.navigate('BottomTabNav')}>
+                            <Text style={styles.touchableHome_text}>S'INSCRIRE</Text>
+                        </TouchableHighlight>
+                    </View>
             </View>
-            <View style={styles.form_container}>
-                <Text style={styles.form_text}>Mot de passe</Text>
-                <TextInput style={styles.form_input} placeholder="Votre plus beau mot de passe"/>
-            </View>
-            <View style={styles.form_container}>
-                <Text style={styles.form_text}>Confirmation du mot de passe</Text>
-                <TextInput style={styles.form_input} placeholder="Confirmez le !"/>
-            </View>
-            <View style={styles.button_container}>
-                <Button title="S'inscrire" color="#008037" onPress={ () => navigation.navigate('BottomTabNav') } />
-            </View>
+            </KeyboardAvoidingView>
+
+
             <View style={styles.description_container}>
-                <Text style={styles.description_text}>Vous allez pouvoir  renseigner plus d'informations dans votre profil pas d'inquiétude !</Text>
-                <TouchableOpacity style={styles.touchable_container}  onPress={ () => navigation.navigate('LogIn') }>
-                    <Text style={styles.touchable_text}>Vous avez déjà un compte ? Venez par là !</Text>
+                <Text style={styles.description_text}>Vous allez pouvoir renseigner plus d'informations dans votre profil pas d'inquiétude !</Text>
+                <TouchableOpacity style={styles.touchableLog_container} onPress={() => navigation.navigate('LogIn')}>
+                    <Text style={styles.touchableLog_text}>Vous avez déjà un compte ? Venez par là !</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -41,7 +65,7 @@ const styles = StyleSheet.create({
     },
 
     title_container: {
-        flex: 1,
+        flex: 0.8,
         justifyContent: 'center',
     },
 
@@ -50,7 +74,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textDecorationLine: "underline",
     },
-    
+
     form_container: {
         flex: 1,
         alignItems: "center",
@@ -71,13 +95,23 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 
-    button_container: {
-        flex: 1,
+    touchableHome_container: {
+        flex: 0.8,
+        width: '50%',
+        alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#008037',
+        borderRadius: 10,
+    },
+
+    touchableHome_text: {
+        fontFamily: 'ScopeOne',
+        color: 'white',
+        fontSize: 16,
     },
 
     description_container: {
-        flex: 1,
+        flex: 0.8,
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginBottom: 15,
@@ -89,11 +123,11 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
 
-    touchable_container: {
+    touchableLog_container: {
 
     },
 
-    touchable_text: {
+    touchableLog_text: {
         fontFamily: 'OpenSansItalic',
         fontSize: 14,
         textDecorationLine: 'underline',

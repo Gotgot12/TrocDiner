@@ -1,18 +1,19 @@
 // Components/Search.js
 
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, TextInput } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
-class Search extends React.Component {
-    render() {
-        return (
-            <View style={styles.main_container}>
-                <Icon name="search-outline" size={15} color="#008037"/>
-                <TextInput style={styles.textinput} placeholder={this.props.placeholder}/>
-            </View>
-        );
-    }
+function Search ({placeholder}) {
+    const [searchText, setSearchText] = useState('');
+
+    return (
+        <View style={styles.main_container}>
+            <Icon name="search-outline" size={15} color="#008037"/>
+            <TextInput style={styles.textinput} placeholder={placeholder}
+                        onChangeText={searchText => setSearchText(searchText)} defaultValue={searchText}/>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

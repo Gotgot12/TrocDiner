@@ -17,7 +17,6 @@ class TopHeader extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
         flexDirection: "row",
         marginTop: 20,
         paddingBottom: 10,
