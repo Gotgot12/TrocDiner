@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
 class TopHeader extends React.Component {
   render() {
     return (

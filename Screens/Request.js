@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Card from '../Components/Card';
@@ -16,7 +17,9 @@ function Request ({ route, navigation }) {
             <Card profile={profile} navigation={navigation}/>
             <View style={styles.recap_container}>
                 <View style={styles.infos_container}>
-                    <Text style={styles.infos_text}>{profile.plat}</Text>
+                    <View style={{flex: 1}}>
+                        <Text style={styles.infos_text}>{profile.plat}</Text>
+                    </View>
                     <View style={styles.dateLiv}>
                         <Text style={styles.infos_text}>{dateSplit[0].split("-")[2] + "/" + dateSplit[0].split("-")[1] + "/" + dateSplit[0].split("-")[0]}</Text>
                         <Text style={styles.infos_text}>{dateSplit[1].split(":")[0] + ":" + dateSplit[1].split(":")[1]}</Text>
@@ -24,7 +27,7 @@ function Request ({ route, navigation }) {
                 </View>
                 <Counter part={profile.part}/>
                 <View style={{flex: 0.7, alignItems: 'center'}}>
-                    <TouchableHighlight style={styles.touchable_container}>
+                    <TouchableHighlight style={styles.touchable_container} onPress={() => alert("Votre commande a été passée !")}>
                         <Text style={styles.touchable_text}>COMMANDER</Text>
                     </TouchableHighlight>
                 </View>
@@ -79,11 +82,13 @@ const styles = StyleSheet.create({
 
     infos_text: {
         fontFamily: 'ScopeOne',
-        fontSize: 20,
+        fontSize: 19,
+        textAlign: 'center',
     },
 
     dateLiv: {
         alignItems: 'center',
+        marginLeft: 10,
     },
 
     part_container: {

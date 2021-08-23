@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
 
 
 function SignUp({ navigation }) {
-    const [email, setEmail] = useState('');
-    const [mdp, setMdp] = useState('');
-    const [confMdp, setConfMdp] = useState('');
+    const [email, setEmail] = useState('horty@gmail.com');
+    const [mdp, setMdp] = useState('test');
+    const [confMdp, setConfMdp] = useState('test');
+
+    const signup = {
+        email: email,
+        password: mdp,
+        prenom: "prenom",
+        nom: "nom",
+        adresse: "adresse",
+        dateNaissance: "2021-08-03T10:54:55.054Z"
+    }
+
+    function inscription(signup) {
+        if (mdp === confMdp) {
+            navigation.navigate('VerifSignUp', { signup: signup})
+        }
+    }
+
 
     return (
         <View style={styles.main_container}>
             <TopHeader />
-            <KeyboardAvoidingView behavior='position'>
-
             <View style={styles.title_container}>
                 <Text style={styles.title_text}>Inscription</Text>
             </View>
 
-
-            <View style={{flex: 3}}>
+                <View style={{flex: 3}}>
                     <View style={styles.form_container}>
                         <Text style={styles.form_text}>E-Mail</Text>
                         <TextInput style={styles.form_input} placeholder="Adresse email ISEP" 
@@ -40,12 +53,12 @@ function SignUp({ navigation }) {
                     </View>
                     
                     <View style={{flex: 1, alignItems: 'center'}}>
-                        <TouchableHighlight style={styles.touchableHome_container} activeOpacity={0.6} underlayColor='#1A4301' onPress={() => navigation.navigate('BottomTabNav')}>
+                        <TouchableHighlight style={styles.touchableHome_container} activeOpacity={0.6} underlayColor='#1A4301' onPress={() => inscription(signup)}>
                             <Text style={styles.touchableHome_text}>S'INSCRIRE</Text>
                         </TouchableHighlight>
                     </View>
-            </View>
-            </KeyboardAvoidingView>
+                </View>
+            
 
 
             <View style={styles.description_container}>
@@ -54,7 +67,9 @@ function SignUp({ navigation }) {
                     <Text style={styles.touchableLog_text}>Vous avez déjà un compte ? Venez par là !</Text>
                 </TouchableOpacity>
             </View>
+
         </View>
+
     )
 }
 

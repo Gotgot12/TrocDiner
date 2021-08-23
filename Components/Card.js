@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     location_text: {
         flex: 1.5,
         fontFamily: 'ScopeOne',
-        fontSize: 14,
+        fontSize: 15,
         textAlign: 'center'
     },
     

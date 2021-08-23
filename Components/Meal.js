@@ -1,11 +1,23 @@
 import React from 'react'
 import { StyleSheet, ScrollView, Text, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import bdd from "../Assets/Data/bdd.json";
+import bdd from "../Assets/Data/bdd.json"
 import Token from "../Components/Token"
 import Search from "../Components/Search"
+import FetchGet from '../Functions/FetchGet';
+import { token } from '../Navigation/SideNav';
 
 function Meal({ navigation }) {
+
+    const bddCommande = FetchGet(token, 'http://127.0.0.1:8000/api/commandes')
+    console.log(bddCommande)
+
+    console.log(token)
+
+    if (bddCommande !== false) {
+        console.log(bddCommande)
+    }
+
     return (
         <ScrollView>
             <View style={{marginTop: 10}}>
@@ -36,6 +48,7 @@ function Meal({ navigation }) {
             </View>
         </ScrollView>
     )
+
 }
 
 
@@ -79,7 +92,8 @@ const styles = StyleSheet.create ({
 
     descriptionMeal_text: {
         fontFamily: 'ScopeOne',
-        fontSize: 16
+        fontSize: 16,
+        textAlign: 'center'
     },
 
     button_container: {
@@ -87,6 +101,7 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 5,
+        marginLeft: 10,
         backgroundColor: '#008037',
         borderRadius: 7,
     },

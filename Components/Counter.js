@@ -6,7 +6,6 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 class Counter extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {
             part: 1
           };

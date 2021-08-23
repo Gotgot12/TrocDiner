@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
-import { TapGestureHandler } from 'react-native-gesture-handler';
 import TopHeader from '../Components/TopHeader';
 
-function Add() {
-    const [plat, setPlat] = useState('');
-    const [parts, setParts] = useState('');
-    const [date, setDate] = useState('');
-    const [description, setDescription] = useState('');
+function Add({ navigation }) {
+    const [plat, setPlat] = useState('Quiche Salade');
+    const [parts, setParts] = useState('4');
+    const [dateLiv, setDateLiv] = useState('21-08-2021 21:00');
+    const [description, setDescription] = useState('c super bon');
+
+    const commande = {
+        plat: plat,
+        part: parseInt(parts),
+        detailsCommande: description,
+        dateLivraison: dateLiv
+    }
+    console.log(commande)
+
+    // const commander = () => {
+    //     FetchPost(commande, 'http://127.0.0.1:8000/api/commandes', token)
+    //     alert("Votre plat a bien été ajouté");
+    //     setPlat("");
+    //     setParts("");
+    //     setDate("");
+    //     setDescription("");
+    // }
 
 
     return (
@@ -35,14 +51,14 @@ function Add() {
                         <View style={styles.group_container}>
                             <Text style={styles.group_text}>Date et heure</Text>
                             <TextInput style={styles.textInput} placeholder="Quand goûter votre délice ?" 
-                                        onChangeText={date => setDate(date)} defaultValue={date} keyboardType={'number-pad'}/>
+                                        onChangeText={dateLiv => setDateLiv(dateLiv)} defaultValue={dateLiv}/>
                         </View>
                         <View style={styles.group_container}>
                             <Text style={styles.group_text}>Description du plat</Text>
                             <TextInput style={styles.textInput} placeholder="Petite description :)" multiline={true} numberOfLines={3}
                                         onChangeText={description => setDescription(description)} defaultValue={description} />
                         </View>
-                        <TouchableHighlight onPress={() => alert("salut")} activeOpacity={0.5} underlayColor='#1A4301' style={styles.touch_container} >
+                        <TouchableHighlight onPress={() => navigation.navigate("AddMeal", {commande: commande})} activeOpacity={0.5} underlayColor='#1A4301' style={styles.touch_container} >
                             <Text style={styles.touch_text}>AJOUTER VOTRE PLAT</Text>
                         </TouchableHighlight>
 

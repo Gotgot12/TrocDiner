@@ -1,0 +1,7 @@
+TODO LIST :
+
+- Inscription / Connexion ✅
+- Ajout d'un plat ✅
+- Récupérer les plats et mettre en forme ❌
+- Modification page de profil (PUT/PATCH)
+- Corriger toutes les erreurs de console
