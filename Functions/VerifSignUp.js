@@ -1,29 +1,24 @@
-import React from 'react'
-import FetchPost from './FetchPost'
+import React from 'react';
 import { Text } from 'react-native';
+import FetchPost from './FetchPost';
 
 function VerifSignUp({ route, navigation }) {
+  const { signup } = route.params;
 
-    const { signup } = route.params;
+  const connexion = FetchPost(signup, 'http://localhost:8000/api/users');
 
-    let connexion = FetchPost(signup, 'http://localhost:8000/api/users')
+  if (connexion === false) {
+    navigation.navigate('SignUp');
+  } else {
+    const login = {
+      email: signup.email,
+      password: signup.password,
+    };
 
-    if (connexion === false) {
-        navigation.navigate('SignUp')
-    }
-    else {
-        const login = {
-            email: signup.email,
-            password: signup.password
-        }
+    navigation.navigate('VerifLogIn', { login });
+  }
 
-        navigation.navigate('VerifLogIn', {login: login})
-    }
-
-    return (
-        <Text>Chargement....</Text>
-    )
+  return <Text>Chargement....</Text>;
 }
 
-
-export default VerifSignUp
+export default VerifSignUp;

@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import BottomTabNav from './BottomTabNav.js';
-import History from '../Screens/History'
-import Settings from '../Screens/Settings.js';
+import BottomTabNav from './BottomTabNav';
+import History from '../Screens/History';
+import Settings from '../Screens/Settings';
 
 const Side = createDrawerNavigator();
 
-let token = ""
+const TokenContext = React.createContext();
 
 function SideNav({ route }) {
-    token = route.params.token.token;
+  const { token } = route.params.token;
 
-    return (
-        <Side.Navigator initialRouteName="Home">
-            <Side.Screen name="Home" component={BottomTabNav}/>
-            <Side.Screen name="Historique de vos plats" component={History}/>
-            <Side.Screen name="Paramètres" component={Settings}/>
-        </Side.Navigator>
-    )
+  return (
+    <TokenContext.Provider value={token}>
+      <Side.Navigator initialRouteName="Home">
+        <Side.Screen name="Home" component={BottomTabNav} />
+        <Side.Screen name="Historique de vos plats" component={History} />
+        <Side.Screen name="Paramètres" component={Settings} />
+      </Side.Navigator>
+    </TokenContext.Provider>
+  );
 }
 
-export { token };
+export { TokenContext };
 export default SideNav;
-
