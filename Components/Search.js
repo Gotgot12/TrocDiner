@@ -13,7 +13,7 @@ function Search({ placeholder }) {
       <TextInput
         style={styles.textinput}
         placeholder={placeholder}
-        onChangeText={() => setSearchText(searchText)}
+        onChangeText={(searchText) => setSearchText(searchText)}
         defaultValue={searchText}
       />
     </View>

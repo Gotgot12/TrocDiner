@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,8 +8,11 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import TopHeader from '../Components/TopHeader';
+import { UserContext } from './UserProvider';
 
 function Add({ navigation }) {
+  const { user } = useContext(UserContext);
+
   const [plat, setPlat] = useState('Quiche Salade');
   const [parts, setParts] = useState('4');
   const [dateLiv, setDateLiv] = useState('21-08-2021 21:00');
@@ -23,14 +26,32 @@ function Add({ navigation }) {
   };
   console.log(commande);
 
-  // const commander = () => {
-  //     useFetchPost(commande, 'http://127.0.0.1:8000/api/commandes', token)
-  //     alert("Votre plat a bien été ajouté");
-  //     setPlat("");
-  //     setParts("");
-  //     setDate("");
-  //     setDescription("");
-  // }
+  const commander = () => {
+    const headerRequest = new Headers();
+    headerRequest.append('Content-Type', 'application/json');
+    headerRequest.append('Accept', 'application/json');
+    headerRequest.append('Authorization', `Bearer ${user.token}`);
+
+    const postOptions = {
+      method: 'POST',
+      body: JSON.stringify(commande),
+      headers: headerRequest,
+      cache: 'default',
+    };
+
+    const requete = new Request('http://127.0.0.1:8000/api/commandes');
+
+    fetch(requete, postOptions).then((res) => {
+      if (res.status < 400) {
+        res.json().then(navigation.navigate('Meal'));
+      }
+    });
+    alert('Votre plat a bien été ajouté');
+    setPlat('');
+    setParts('');
+    setDateLiv('');
+    setDescription('');
+  };
 
   return (
     <View style={styles.main_container}>
@@ -47,7 +68,7 @@ function Add({ navigation }) {
               <TextInput
                 style={styles.textInput}
                 placeholder="Quel plat ?"
-                onChangeText={() => setPlat(plat)}
+                onChangeText={(plat) => setPlat(plat)}
                 defaultValue={plat}
               />
             </View>
@@ -56,7 +77,7 @@ function Add({ navigation }) {
               <TextInput
                 style={styles.textInput}
                 placeholder="Pour combien ?"
-                onChangeText={() => setParts(parts)}
+                onChangeText={(parts) => setParts(parts)}
                 defaultValue={parts}
                 keyboardType="number-pad"
               />
@@ -66,7 +87,7 @@ function Add({ navigation }) {
               <TextInput
                 style={styles.textInput}
                 placeholder="Quand goûter votre délice ?"
-                onChangeText={() => setDateLiv(dateLiv)}
+                onChangeText={(dateLiv) => setDateLiv(dateLiv)}
                 defaultValue={dateLiv}
               />
             </View>
@@ -77,16 +98,12 @@ function Add({ navigation }) {
                 placeholder="Petite description :)"
                 multiline
                 numberOfLines={3}
-                onChangeText={() => setDescription(description)}
+                onChangeText={(description) => setDescription(description)}
                 defaultValue={description}
               />
             </View>
             <TouchableHighlight
-              onPress={() =>
-                navigation.navigate('AddMeal', {
-                  commande,
-                })
-              }
+              onPress={() => commander()}
               activeOpacity={0.5}
               underlayColor="#1A4301"
               style={styles.touch_container}

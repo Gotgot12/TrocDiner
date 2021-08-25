@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Card from '../Components/Card';
 import Search from '../Components/Search';

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -11,13 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Token from './Token';
 import Search from './Search';
 import useFetchGet from '../Functions/useFetchGet';
-import { UserContext } from '../Screens/UserProvider';
 
 function Meal({ navigation }) {
-  const { user } = useContext(UserContext);
-
-  console.log(user);
-
   const bddCommande = useFetchGet('http://127.0.0.1:8000/api/commandes');
   console.log(bddCommande);
 

@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Card({ user, commande, navigation }) {
-  console.log(commande);
   return (
     <TouchableOpacity
       style={styles.main_container}

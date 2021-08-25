@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
-import useFetchPost from '../Functions/useFetchPost';
 import { UserContext } from './UserProvider';
 
 function LogIn({ navigation }) {
@@ -22,14 +21,31 @@ function LogIn({ navigation }) {
     password: mdp,
   };
   console.log(loginForm);
-  console.log(email, mdp);
-  const { token } = useFetchPost(loginForm);
 
   const login = () => {
-    setUser({
-      email,
-      password: mdp,
-      token,
+    const headerRequest = new Headers();
+    headerRequest.append('Content-Type', 'application/json');
+    headerRequest.append('Accept', 'application/json');
+
+    const postOptions = {
+      method: 'POST',
+      body: JSON.stringify(loginForm),
+      headers: headerRequest,
+      cache: 'default',
+    };
+
+    const requete = new Request('http://localhost:8000/api/login');
+
+    fetch(requete, postOptions).then((res) => {
+      if (res.status < 400) {
+        res.json().then((token) => {
+          setUser({
+            email,
+            password: mdp,
+            token: token.token,
+          });
+        });
+      }
     });
   };
 
@@ -48,7 +64,7 @@ function LogIn({ navigation }) {
             <TextInput
               style={styles.form_input}
               placeholder="Adresse email ISEP"
-              onChangeText={() => setEmail(email)}
+              onChangeText={(email) => setEmail(email)}
               defaultValue={email}
             />
           </View>
@@ -58,7 +74,7 @@ function LogIn({ navigation }) {
             <TextInput
               style={styles.form_input}
               placeholder="Votre plus beau mot de passe"
-              onChangeText={() => setMdp(mdp)}
+              onChangeText={(mdp) => setMdp(mdp)}
               defaultValue={mdp}
               secureTextEntry
             />

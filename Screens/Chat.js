@@ -1,15 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import TopHeader from '../Components/TopHeader';
-import DecodeTokenJWT from '../Functions/DecodeTokenJWT';
-import useFetchGet from '../Functions/useFetchGet';
-import { TokenContext } from '../Navigation/SideNav';
 
 function Chat() {
-  const token = useContext(TokenContext);
-  console.log(DecodeTokenJWT(token));
-  console.log(useFetchGet(token, 'http://127.0.0.1:8000/api/commandes'));
-
   return (
     <View style={styles.global_container}>
       <TopHeader />

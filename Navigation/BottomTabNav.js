@@ -26,9 +26,11 @@ function BottomTabNav() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            );
+          },
         }}
       />
 
@@ -37,9 +39,11 @@ function BottomTabNav() {
         component={Chat}
         options={{
           tabBarLabel: 'Chat',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="chat" color={color} size={size} />
-          ),
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons name="chat" color={color} size={size} />
+            );
+          },
         }}
       />
 
@@ -48,14 +52,16 @@ function BottomTabNav() {
         component={Add}
         options={{
           tabBarLabel: '',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="plus-circle"
-              color={color}
-              size={2 * size}
-              style={{ marginBottom: -12 }}
-            />
-          ),
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons
+                name="plus-circle"
+                color={color}
+                size={2 * size}
+                style={{ marginBottom: -12 }}
+              />
+            );
+          },
         }}
       />
 
@@ -64,13 +70,15 @@ function BottomTabNav() {
         component={Friends}
         options={{
           tabBarLabel: 'Friends',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account-group"
-              color={color}
-              size={size}
-            />
-          ),
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons
+                name="account-group"
+                color={color}
+                size={size}
+              />
+            );
+          },
         }}
       />
 
@@ -79,9 +87,11 @@ function BottomTabNav() {
         component={Notifications}
         options={{
           tabBarLabel: 'Notifications',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons name="bell" color={color} size={size} />
+            );
+          },
           tabBarBadge: 3,
         }}
       />

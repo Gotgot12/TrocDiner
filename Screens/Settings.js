@@ -1,13 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import TopHeader from '../Components/TopHeader';
-import useFetchGet from '../Functions/useFetchGet';
-import { TokenContext } from '../Navigation/SideNav';
 
 function Settings() {
-  const token = useContext(TokenContext);
-  useFetchGet(token, 'http://localhost:8000/api/users');
-
   return (
     <View style={styles.global_container}>
       <TopHeader />

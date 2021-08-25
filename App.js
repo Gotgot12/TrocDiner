@@ -21,7 +21,6 @@ export default function App() {
 
   const Root = () => {
     const { user } = useContext(UserContext);
-    console.log(user);
     return user ? <SideNav /> : <NavigationLogSign />;
   };
 

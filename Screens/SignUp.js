@@ -14,7 +14,7 @@ function SignUp({ navigation }) {
   const [mdp, setMdp] = useState('test');
   const [confMdp, setConfMdp] = useState('test');
 
-  const signup = {
+  const signupForm = {
     email,
     password: mdp,
     prenom: 'prenom',
@@ -23,11 +23,31 @@ function SignUp({ navigation }) {
     dateNaissance: '2021-08-03T10:54:55.054Z',
   };
 
-  function inscription() {
+  const signup = () => {
     if (mdp === confMdp) {
-      navigation.navigate('VerifSignUp', { signup });
+      const headerRequest = new Headers();
+      headerRequest.append('Content-Type', 'application/json');
+      headerRequest.append('Accept', 'application/json');
+
+      const postOptions = {
+        method: 'POST',
+        body: JSON.stringify(signupForm),
+        headers: headerRequest,
+        cache: 'default',
+      };
+
+      const requete = new Request('http://localhost:8000/api/users');
+
+      fetch(requete, postOptions).then((res) => {
+        if (res.status < 400) {
+          res.json().then((connect) => {
+            console.log(connect);
+            navigation.navigate('LogIn');
+          });
+        }
+      });
     }
-  }
+  };
 
   return (
     <View style={styles.main_container}>
@@ -42,7 +62,7 @@ function SignUp({ navigation }) {
           <TextInput
             style={styles.form_input}
             placeholder="Adresse email ISEP"
-            onChangeText={() => setEmail(email)}
+            onChangeText={(email) => setEmail(email)}
             defaultValue={email}
           />
         </View>
@@ -52,7 +72,7 @@ function SignUp({ navigation }) {
           <TextInput
             style={styles.form_input}
             placeholder="Votre plus beau mot de passe"
-            onChangeText={() => setMdp(mdp)}
+            onChangeText={(mdp) => setMdp(mdp)}
             defaultValue={mdp}
             secureTextEntry
           />
@@ -63,7 +83,7 @@ function SignUp({ navigation }) {
           <TextInput
             style={styles.form_input}
             placeholder="Confirmez le !"
-            onChangeText={() => setConfMdp(confMdp)}
+            onChangeText={(confMdp) => setConfMdp(confMdp)}
             defaultValue={confMdp}
             secureTextEntry
           />
@@ -74,7 +94,7 @@ function SignUp({ navigation }) {
             style={styles.touchableHome_container}
             activeOpacity={0.6}
             underlayColor="#1A4301"
-            onPress={() => inscription(signup)}
+            onPress={() => signup()}
           >
             <Text style={styles.touchableHome_text}>S&apos;INSCRIRE</Text>
           </TouchableHighlight>

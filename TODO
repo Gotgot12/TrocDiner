@@ -3,6 +3,6 @@ TODO LIST :
 - Inscription / Connexion ✅
 - Ajout d'un plat ✅
 - Récupérer les plats et mettre en forme ✅
-- Gérer le fait qu'un utilisateur puisse partager plusieurs plats
+- Gérer le fait qu'un utilisateur puisse partager plusieurs plats ✅
 - Modification page de profil (PUT/PATCH)
 - Corriger toutes les erreurs de console

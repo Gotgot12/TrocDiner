@@ -4,8 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignUp from '../Screens/SignUp';
 import LogIn from '../Screens/LogIn';
 import SideNav from './SideNav';
-import VerifLogIn from '../Functions/VerifLogIn';
-import VerifSignUp from '../Functions/VerifSignUp';
 
 const Stack = createStackNavigator();
 
@@ -16,8 +14,6 @@ function NavigationLogSign() {
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SideNav" component={SideNav} />
-        <Stack.Screen name="VerifLogIn" component={VerifLogIn} />
-        <Stack.Screen name="VerifSignUp" component={VerifSignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );
