@@ -1,11 +1,14 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Card from '../Components/Card';
 import Search from '../Components/Search';
 import TopHeader from '../Components/TopHeader';
-import bdd from '../Assets/Data/bdd.json';
+import FetchGet from '../Functions/FetchGet';
 
 function Friends({ navigation }) {
+  const bddCommande = FetchGet('http://127.0.0.1:8000/api/users');
+  console.log(bddCommande);
+
   return (
     <View>
       <TopHeader />
@@ -16,9 +19,9 @@ function Friends({ navigation }) {
             <Search placeholder="Rechercher une personne" />
           </View>
           <View>
-            {bdd.map((m) => (
+            {bddCommande.map((m) => (
               <View key={m.id} style={styles.card_container}>
-                <Card profile={m} navigation={navigation} />
+                <Card user={m} commande={m.commandes} navigation={navigation} />
               </View>
             ))}
           </View>

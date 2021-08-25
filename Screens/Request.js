@@ -4,8 +4,9 @@ import Card from '../Components/Card';
 import Counter from '../Components/Counter';
 
 function Request({ route, navigation }) {
-  const { profile } = route.params;
-  const dateSplit = profile.dateLivraison.split(' ');
+  const { user, commande, plat } = route.params;
+
+  const dateSplit = plat.dateLivraison.split('T');
   return (
     <View style={styles.main_container}>
       <View style={styles.title_container}>
@@ -14,11 +15,11 @@ function Request({ route, navigation }) {
           Petit rappel: Vous avez ... jetons
         </Text>
       </View>
-      <Card profile={profile} navigation={navigation} />
+      <Card user={user} commande={commande} navigation={navigation} />
       <View style={styles.recap_container}>
         <View style={styles.infos_container}>
           <View style={styles.profileText_container}>
-            <Text style={styles.infos_text}>{profile.plat}</Text>
+            <Text style={styles.infos_text}>{plat.plat}</Text>
           </View>
           <View style={styles.dateLiv}>
             <Text style={styles.infos_text}>
@@ -31,7 +32,7 @@ function Request({ route, navigation }) {
             </Text>
           </View>
         </View>
-        <Counter part={profile.part} />
+        <Counter part={plat.part} />
         <View style={styles.addButton_container}>
           <TouchableHighlight
             style={styles.touchable_container}
@@ -43,7 +44,7 @@ function Request({ route, navigation }) {
       </View>
       <View style={styles.details_container}>
         <Text style={styles.titledetails_text}>Détails de la commande :</Text>
-        <Text style={styles.lorem_text}>{profile.detailsCommande}</Text>
+        <Text style={styles.lorem_text}>{plat.detailsCommande}</Text>
       </View>
     </View>
   );

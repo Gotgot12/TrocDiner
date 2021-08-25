@@ -5,7 +5,7 @@ import FetchGet from '../Functions/FetchGet';
 import { TokenContext } from '../Navigation/SideNav';
 
 function Settings() {
-  const token = useContext(token);
+  const token = useContext(TokenContext);
   FetchGet(token, 'http://localhost:8000/api/users');
 
   return (

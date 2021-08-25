@@ -8,16 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import bdd from '../Assets/Data/bdd.json';
 import Token from './Token';
 import Search from './Search';
-import { TokenContext } from '../Navigation/SideNav';
 import FetchGet from '../Functions/FetchGet';
 
 function Meal({ navigation }) {
-  const token = useContext(TokenContext);
-
-  const bddCommande = FetchGet(token, 'http://127.0.0.1:8000/api/commandes');
+  const bddCommande = FetchGet('http://127.0.0.1:8000/api/commandes');
   console.log(bddCommande);
 
   // if (bddCommande !== false) {
@@ -34,14 +30,19 @@ function Meal({ navigation }) {
         </View>
       </View>
       <View style={styles.main_container}>
-        {bdd.map((m) => (
+        {bddCommande.map((m) => (
           <View style={styles.eachMeal} key={m.id}>
             <TouchableOpacity
               style={styles.account_container}
-              onPress={() => navigation.navigate('Profile', { profile: m })}
+              onPress={() =>
+                navigation.navigate('Profile', {
+                  user: m.chief,
+                  commande: bddCommande,
+                })
+              }
             >
               <Icon name="account" size={35} color="black" />
-              <Text style={styles.account_text}>{m.prenom}</Text>
+              <Text style={styles.account_text}>{m.chief.prenom}</Text>
             </TouchableOpacity>
             <View style={styles.descriptionMeal_container}>
               <Text style={styles.descriptionMeal_text}>{m.plat}</Text>
@@ -49,16 +50,22 @@ function Meal({ navigation }) {
                 {m.part} {m.part > 1 ? 'parts' : 'part'}
               </Text>
               <Text style={styles.descriptionMeal_text}>
-                {`${m.dateLivraison.split(' ')[0].split('-')[2]}/${
-                  m.dateLivraison.split(' ')[0].split('-')[1]
-                }/${m.dateLivraison.split(' ')[0].split('-')[0]}`}
+                {`${m.dateLivraison.split('T')[0].split('-')[2]}/${
+                  m.dateLivraison.split('T')[0].split('-')[1]
+                }/${m.dateLivraison.split('T')[0].split('-')[0]}`}
               </Text>
             </View>
             <TouchableHighlight
               activeOpacity={0.6}
               underlayColor="#1A4301"
               style={styles.button_container}
-              onPress={() => navigation.navigate('Request', { profile: m })}
+              onPress={() =>
+                navigation.navigate('Request', {
+                  user: m.chief,
+                  commande: bddCommande,
+                  plat: m,
+                })
+              }
             >
               <Text style={styles.button_text}>COMMANDER</Text>
             </TouchableHighlight>

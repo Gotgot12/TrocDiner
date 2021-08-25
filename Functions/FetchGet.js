@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { TokenContext } from '../Navigation/SideNav';
 
-function FetchGet(token, link) {
+function FetchGet(link) {
   const [items, setItems] = useState([]);
+  const token = useContext(TokenContext);
 
   const headerRequest = new Headers();
-  headerRequest.append('Authorization', `Bearer${token}`);
+  console.log(token);
   headerRequest.append('Content-Type', 'application/json');
   headerRequest.append('Accept', 'application/json');
+  headerRequest.append('Authorization', `Bearer ${token}`);
 
   const requete = new Request(link);
 

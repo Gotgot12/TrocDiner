@@ -4,8 +4,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Profile({ route }) {
-  const { profile } = route.params;
-  const dateSplit = profile.dateLivraison.split(' ');
+  const { user, commande } = route.params;
+  console.log(commande);
+  const dateNaissanceSplit = user.dateNaissance.split('T');
+
   return (
     <View style={styles.main_container}>
       <View style={styles.title_container}>
@@ -15,36 +17,45 @@ function Profile({ route }) {
         <View style={styles.infoPerso_container}>
           <Icon name="account" size={35} color="black" />
           <Text style={styles.infoPerso_text}>
-            {profile.prenom} {profile.nom}
+            {user.prenom} {user.nom}
           </Text>
           <Text style={styles.infoPerso_text}>
-            Date de naissance : {profile.dateNaissance}
+            Date de naissance :{' '}
+            {`${dateNaissanceSplit[0].split('-')[2]}/${
+              dateNaissanceSplit[0].split('-')[1]
+            }/${dateNaissanceSplit[0].split('-')[0]}`}{' '}
           </Text>
-          <Text style={styles.infoPerso_text}>Adresse : {profile.adresse}</Text>
-          <Text style={styles.infoPerso_text}>E-Mail : {profile.email}</Text>
+          <Text style={styles.infoPerso_text}>Adresse : {user.adresse}</Text>
+          <Text style={styles.infoPerso_text}>E-Mail : {user.email}</Text>
           <Text style={styles.infoPerso_text}>
-            Moyenne de ses notes : {profile.notes}
+            Moyenne de ses notes : {user.notes}
           </Text>
         </View>
         <View style={styles.histoInfoPlat_container}>
           <Text style={styles.histo_text}>Historique des plats :</Text>
           <ScrollView>
-            <View style={styles.infoPlat_container}>
-              <Text style={styles.infoPerso_text}>{profile.plat}</Text>
-              <Text style={styles.infoPerso_text}>
-                Le{' '}
-                {`${dateSplit[0].split('-')[2]}/${dateSplit[0].split('-')[1]}/${
-                  dateSplit[0].split('-')[0]
-                }`}{' '}
-                à{' '}
-                {`${dateSplit[1].split(':')[0]}h${dateSplit[1].split(':')[1]}`}
-              </Text>
-              <Text style={styles.infoPerso_text}>
-                {profile.part} {profile.part > 1 ? 'parts' : 'part'}
-              </Text>
-              <Text style={styles.infoPerso_text}>
-                Détails du plat : {profile.detailsCommande}
-              </Text>
+            <View style={styles.infoAllPlat_container}>
+              {commande.map((plat) => (
+                <View style={styles.infoPlat_container} key={plat.id}>
+                  <Text style={styles.infoPerso_text}>{plat.plat}</Text>
+                  <Text style={styles.infoPerso_text}>
+                    Le{' '}
+                    {`${plat.dateLivraison.split('T')[0].split('-')[2]}/${
+                      plat.dateLivraison.split('T')[0].split('-')[1]
+                    }/${plat.dateLivraison.split('T')[0].split('-')[0]}`}{' '}
+                    à{' '}
+                    {`${plat.dateLivraison.split('T')[1].split(':')[0]}h${
+                      plat.dateLivraison.split('T')[1].split(':')[1]
+                    }`}
+                  </Text>
+                  <Text style={styles.infoPerso_text}>
+                    {plat.part} {plat.part > 1 ? 'parts' : 'part'}
+                  </Text>
+                  <Text style={styles.infoPerso_text}>
+                    Détails du plat : {plat.detailsCommande}
+                  </Text>
+                </View>
+              ))}
             </View>
           </ScrollView>
         </View>
