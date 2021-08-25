@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
-import { TokenContext } from '../Navigation/SideNav';
+import { UserContext } from '../Screens/UserProvider';
 
-function FetchGet(link) {
+function useFetchGet(link) {
   const [items, setItems] = useState([]);
-  const token = useContext(TokenContext);
+  const { user } = useContext(UserContext);
 
   const headerRequest = new Headers();
-  console.log(token);
+
   headerRequest.append('Content-Type', 'application/json');
   headerRequest.append('Accept', 'application/json');
-  headerRequest.append('Authorization', `Bearer ${token}`);
+  headerRequest.append('Authorization', `Bearer ${user.token}`);
 
   const requete = new Request(link);
 
@@ -35,4 +35,4 @@ function FetchGet(link) {
   return items;
 }
 
-export default FetchGet;
+export default useFetchGet;

@@ -32,9 +32,11 @@
   
     "rules": {
       "no-console": "off",
+      "object-shorthand": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": "off",
+      "global-require": "off",
       "no-use-before-define": ["error", { "variables": false }],
       "react-native/no-color-literals": "off", // enforces variable names to be used for storing colors
       "prettier/prettier": [

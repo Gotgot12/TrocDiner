@@ -10,10 +10,15 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Token from './Token';
 import Search from './Search';
-import FetchGet from '../Functions/FetchGet';
+import useFetchGet from '../Functions/useFetchGet';
+import { UserContext } from '../Screens/UserProvider';
 
 function Meal({ navigation }) {
-  const bddCommande = FetchGet('http://127.0.0.1:8000/api/commandes');
+  const { user } = useContext(UserContext);
+
+  console.log(user);
+
+  const bddCommande = useFetchGet('http://127.0.0.1:8000/api/commandes');
   console.log(bddCommande);
 
   // if (bddCommande !== false) {

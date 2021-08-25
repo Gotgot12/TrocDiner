@@ -24,7 +24,7 @@ function Add({ navigation }) {
   console.log(commande);
 
   // const commander = () => {
-  //     FetchPost(commande, 'http://127.0.0.1:8000/api/commandes', token)
+  //     useFetchPost(commande, 'http://127.0.0.1:8000/api/commandes', token)
   //     alert("Votre plat a bien été ajouté");
   //     setPlat("");
   //     setParts("");

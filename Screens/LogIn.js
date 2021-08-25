@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,14 +9,28 @@ import {
   ScrollView,
 } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
+import useFetchPost from '../Functions/useFetchPost';
+import { UserContext } from './UserProvider';
 
 function LogIn({ navigation }) {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('gotgot-il@hotmail.fr');
   const [mdp, setMdp] = useState('test');
 
-  const login = {
-    email,
+  const loginForm = {
+    email: email,
     password: mdp,
+  };
+  console.log(loginForm);
+  console.log(email, mdp);
+  const { token } = useFetchPost(loginForm);
+
+  const login = () => {
+    setUser({
+      email,
+      password: mdp,
+      token,
+    });
   };
 
   return (
@@ -55,11 +69,7 @@ function LogIn({ navigation }) {
               style={styles.touchableHome_container}
               activeOpacity={0.6}
               underlayColor="#1A4301"
-              onPress={() =>
-                navigation.navigate('VerifLogIn', {
-                  login,
-                })
-              }
+              onPress={() => login()}
             >
               <Text style={styles.touchableHome_text}>SE CONNECTER</Text>
             </TouchableHighlight>

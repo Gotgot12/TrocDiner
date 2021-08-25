@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-function FetchPost(body, link = 'http://localhost:8000/api/login', token = '') {
+function useFetchPost(
+  body,
+  link = 'http://localhost:8000/api/login',
+  token = ''
+) {
   const [response, setResponse] = useState([]);
 
   const headerRequest = new Headers();
@@ -36,4 +40,4 @@ function FetchPost(body, link = 'http://localhost:8000/api/login', token = '') {
   return response;
 }
 
-export default FetchPost;
+export default useFetchPost;

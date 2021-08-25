@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
+import { UserContext, UserProvider } from './Screens/UserProvider';
 import NavigationLogSign from './Navigation/NavigationLogSign';
+import SideNav from './Navigation/SideNav';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,5 +19,15 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <NavigationLogSign />;
+  const Root = () => {
+    const { user } = useContext(UserContext);
+    console.log(user);
+    return user ? <SideNav /> : <NavigationLogSign />;
+  };
+
+  return (
+    <UserProvider>
+      <Root />
+    </UserProvider>
+  );
 }

@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Card from '../Components/Card';
 import Search from '../Components/Search';
 import TopHeader from '../Components/TopHeader';
-import FetchGet from '../Functions/FetchGet';
+import useFetchGet from '../Functions/useFetchGet';
 
 function Friends({ navigation }) {
-  const bddCommande = FetchGet('http://127.0.0.1:8000/api/users');
+  const bddCommande = useFetchGet('http://127.0.0.1:8000/api/users');
   console.log(bddCommande);
 
   return (
