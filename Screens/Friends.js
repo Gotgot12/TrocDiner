@@ -6,8 +6,8 @@ import TopHeader from '../Components/TopHeader';
 import useFetchGet from '../Functions/useFetchGet';
 
 function Friends({ navigation }) {
-  const bddCommande = useFetchGet('http://127.0.0.1:8000/api/users');
-  console.log(bddCommande);
+  const bddUser = useFetchGet('http://127.0.0.1:8000/api/users');
+  console.log(bddUser);
 
   return (
     <View>
@@ -19,7 +19,7 @@ function Friends({ navigation }) {
             <Search placeholder="Rechercher une personne" />
           </View>
           <View>
-            {bddCommande.map((m) => (
+            {bddUser.map((m) => (
               <View key={m.id} style={styles.card_container}>
                 <Card user={m} commande={m.commandes} navigation={navigation} />
               </View>

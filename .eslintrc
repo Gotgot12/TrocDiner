@@ -33,7 +33,7 @@
     "rules": {
       "no-console": "off",
       "object-shorthand": "off",
-      "no-shadow": ["error", { "allow": ["email", "mdp", "confMdp", "plat", "parts", "description", "dateLiv", "searchText"] }],
+      "no-shadow": ["error", { "allow": ["email", "mdp", "confMdp", "plat", "parts", "description", "dateLiv", "searchText", "nom", "prenom", "adresse", "dateNaissance"] }],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": "off",

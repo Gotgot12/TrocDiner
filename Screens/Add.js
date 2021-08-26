@@ -12,6 +12,7 @@ import { UserContext } from './UserProvider';
 
 function Add({ navigation }) {
   const { user } = useContext(UserContext);
+  console.log(user);
 
   const [plat, setPlat] = useState('Quiche Salade');
   const [parts, setParts] = useState('4');

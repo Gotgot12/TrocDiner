@@ -6,6 +6,7 @@ import Friends from '../Screens/Friends';
 import Add from '../Screens/Add';
 import Notifications from '../Screens/Notifications';
 import Home from '../Screens/Home';
+import Settings from '../Screens/Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -93,6 +94,19 @@ function BottomTabNav() {
             );
           },
           tabBarBadge: 3,
+        }}
+      />
+
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: function Icon({ color, size }) {
+            return (
+              <MaterialCommunityIcons name="cog" color={color} size={size} />
+            );
+          },
         }}
       />
     </Tab.Navigator>

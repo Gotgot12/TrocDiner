@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import TopHeader from '../Components/TopHeaderLogSign';
 import { UserContext } from './UserProvider';
+import DecodeTokenJWT from '../Functions/DecodeTokenJWT';
 
 function LogIn({ navigation }) {
   const { setUser } = useContext(UserContext);
@@ -39,10 +40,15 @@ function LogIn({ navigation }) {
     fetch(requete, postOptions).then((res) => {
       if (res.status < 400) {
         res.json().then((token) => {
+          const payLoadToken = DecodeTokenJWT(token.token);
           setUser({
+            id: payLoadToken.id,
             email,
-            password: mdp,
             token: token.token,
+            nom: payLoadToken.nom,
+            prenom: payLoadToken.prenom,
+            adresse: payLoadToken.adresse,
+            dateNaissance: payLoadToken.dateNaissance.date,
           });
         });
       }
