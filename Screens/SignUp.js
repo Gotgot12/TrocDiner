@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import TopHeader from '../Components/TopHeaderLogSign';
 
 function SignUp({ navigation }) {
@@ -17,10 +18,6 @@ function SignUp({ navigation }) {
   const signupForm = {
     email,
     password: mdp,
-    prenom: 'prenom',
-    nom: 'nom',
-    adresse: 'adresse',
-    dateNaissance: '2021-08-03T10:54:55.054Z',
   };
 
   const signup = () => {
@@ -56,50 +53,52 @@ function SignUp({ navigation }) {
         <Text style={styles.title_text}>Inscription</Text>
       </View>
 
-      <View style={styles.content_container}>
-        <View style={styles.form_container}>
-          <Text style={styles.form_text}>E-Mail</Text>
-          <TextInput
-            style={styles.form_input}
-            placeholder="Adresse email ISEP"
-            onChangeText={(email) => setEmail(email)}
-            defaultValue={email}
-          />
-        </View>
+      <ScrollView>
+        <View style={styles.content_container}>
+          <View style={styles.form_container}>
+            <Text style={styles.form_text}>E-Mail</Text>
+            <TextInput
+              style={styles.form_input}
+              placeholder="Adresse email ISEP"
+              onChangeText={(email) => setEmail(email)}
+              defaultValue={email}
+            />
+          </View>
 
-        <View style={styles.form_container}>
-          <Text style={styles.form_text}>Mot de passe</Text>
-          <TextInput
-            style={styles.form_input}
-            placeholder="Votre plus beau mot de passe"
-            onChangeText={(mdp) => setMdp(mdp)}
-            defaultValue={mdp}
-            secureTextEntry
-          />
-        </View>
+          <View style={styles.form_container}>
+            <Text style={styles.form_text}>Mot de passe</Text>
+            <TextInput
+              style={styles.form_input}
+              placeholder="Votre plus beau mot de passe"
+              onChangeText={(mdp) => setMdp(mdp)}
+              defaultValue={mdp}
+              secureTextEntry
+            />
+          </View>
 
-        <View style={styles.form_container}>
-          <Text style={styles.form_text}>Confirmation du mot de passe</Text>
-          <TextInput
-            style={styles.form_input}
-            placeholder="Confirmez le !"
-            onChangeText={(confMdp) => setConfMdp(confMdp)}
-            defaultValue={confMdp}
-            secureTextEntry
-          />
-        </View>
+          <View style={styles.form_container}>
+            <Text style={styles.form_text}>Confirmation du mot de passe</Text>
+            <TextInput
+              style={styles.form_input}
+              placeholder="Confirmez le !"
+              onChangeText={(confMdp) => setConfMdp(confMdp)}
+              defaultValue={confMdp}
+              secureTextEntry
+            />
+          </View>
 
-        <View style={styles.buttonSign_container}>
-          <TouchableHighlight
-            style={styles.touchableHome_container}
-            activeOpacity={0.6}
-            underlayColor="#1A4301"
-            onPress={() => signup()}
-          >
-            <Text style={styles.touchableHome_text}>S&apos;INSCRIRE</Text>
-          </TouchableHighlight>
+          <View style={styles.buttonSign_container}>
+            <TouchableHighlight
+              style={styles.touchableHome_container}
+              activeOpacity={0.6}
+              underlayColor="#1A4301"
+              onPress={() => signup()}
+            >
+              <Text style={styles.touchableHome_text}>S&apos;INSCRIRE</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.description_container}>
         <Text style={styles.description_text}>

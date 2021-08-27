@@ -10,7 +10,7 @@ function Friends({ navigation }) {
   console.log(bddUser);
 
   return (
-    <View>
+    <View style={styles.global_container}>
       <TopHeader />
       <ScrollView>
         <View style={styles.main_container}>
@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
   card_container: {
     height: 100,
     width: 350,
+  },
+
+  global_container: {
+    flex: 1,
   },
 
   main_container: {

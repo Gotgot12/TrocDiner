@@ -41,6 +41,8 @@ function LogIn({ navigation }) {
       if (res.status < 400) {
         res.json().then((token) => {
           const payLoadToken = DecodeTokenJWT(token.token);
+          const dateNaissance = new Date(payLoadToken.dateNaissance.date);
+          console.log(dateNaissance, typeof dateNaissance);
           setUser({
             id: payLoadToken.id,
             email,
@@ -48,7 +50,7 @@ function LogIn({ navigation }) {
             nom: payLoadToken.nom,
             prenom: payLoadToken.prenom,
             adresse: payLoadToken.adresse,
-            dateNaissance: payLoadToken.dateNaissance.date,
+            dateNaissance: dateNaissance,
           });
         });
       }
