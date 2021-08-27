@@ -15,22 +15,26 @@ function Settings() {
   const [nom, setNom] = useState(user.nom);
   const [prenom, setPrenom] = useState(user.prenom);
   const [adresse, setAdresse] = useState(user.adresse);
-  const [dateNaissance, setDateNaissance] = useState(user.dateNaissance);
+  const [dateNaissance, setDateNaissance] = useState(
+    user.dateNaissance.toLocaleDateString('fr-FR')
+  );
+
+  const goodFormatDateNaissance = `${dateNaissance.split('/')[1]}/${
+    dateNaissance.split('/')[0]
+  }/${dateNaissance.split('/')[2]}`;
 
   const userForm = {
     nom: nom,
     prenom: prenom,
     adresse: adresse,
-    dateNaissance: dateNaissance,
+    dateNaissance: goodFormatDateNaissance,
   };
-  console.log(userForm);
 
   const modifProfile = () => {
     const headerRequest = new Headers();
     headerRequest.append('Content-Type', 'application/json');
     headerRequest.append('Accept', 'application/json');
     headerRequest.append('Authorization', `Bearer ${user.token}`);
-
     const postOptions = {
       method: 'PUT',
       body: JSON.stringify(userForm),
@@ -43,6 +47,7 @@ function Settings() {
     fetch(requete, postOptions).then((res) => {
       if (res.status < 400) {
         res.json().then((change) => {
+          const formatDate = new Date(change.dateNaissance);
           setUser({
             id: user.id,
             email: user.email,
@@ -50,7 +55,7 @@ function Settings() {
             nom: change.nom,
             prenom: change.prenom,
             adresse: change.adresse,
-            dateNaissance: change.dateNaissance,
+            dateNaissance: formatDate,
           });
         });
       }
