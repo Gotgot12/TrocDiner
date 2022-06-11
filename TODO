@@ -6,11 +6,12 @@ TODO LIST :
 - Gérer le fait qu'un utilisateur puisse partager plusieurs plats ✅
 - Modification page de profil (PUT/PATCH) ✅
 - Trouver méthode pour gérer le format date (Naissance et Livraison)
-- Mettre en place le système de commande de plats (jetons, enlever une part/plat etc...)
+- Mettre en place le système de commande de plats (jetons, enlever une part/plat etc...) ✅
+- Affichage des plats correctement ✅
 - Modifier une commande en cours
 - Modification email et mot de passe
 - Chat ?
 - Gérer les notifications
-- Session de l'utilisateur/connexion automatique
+- Session de l'utilisateur/connexion automatique ✅
 - Confirmation par email
 - Améliorer le code (optimisation possible)

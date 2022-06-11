@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -8,36 +8,50 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Token from './Token';
+import Coin from './Coin';
 import Search from './Search';
 import useFetchGet from '../Functions/useFetchGet';
+import { UserContext } from '../Screens/UserProvider';
 
 function Meal({ navigation }) {
   const bddCommande = useFetchGet('http://127.0.0.1:8000/api/commandes');
-  console.log(bddCommande);
+  const bddUser = useFetchGet('http://127.0.0.1:8000/api/users');
+  const { user } = useContext(UserContext);
 
-  // if (bddCommande !== false) {
-  //   console.log(bddCommande);
-  // }
+  console.log(bddCommande);
+  const bddCommandeDisplay = [];
+  bddCommande.forEach((commande) => {
+    if (commande.chief.id !== user.id) {
+      commande.dateLivraison = new Date(commande.dateLivraison); // eslint-disable-line no-param-reassign
+      bddCommandeDisplay.push(commande);
+    }
+  });
+
+  bddCommandeDisplay.sort((a, b) => {
+    if (a.dateLivraison < b.dateLivraison) return -1;
+    if (a.date > b.dateLivraison) return 1;
+    return 0;
+  });
 
   return (
     <ScrollView>
       <View style={styles.footOfHead}>
-        <Token />
+        <Coin />
         <Search placeholder="Recherche de plat" />
         <View style={styles.title_container}>
           <Text style={styles.title_text}>Les meilleurs plats !</Text>
         </View>
       </View>
       <View style={styles.main_container}>
-        {bddCommande.map((m) => (
+        {bddCommandeDisplay.map((m) => (
           <View style={styles.eachMeal} key={m.id}>
             <TouchableOpacity
               style={styles.account_container}
               onPress={() =>
                 navigation.navigate('Profile', {
-                  user: m.chief,
-                  commande: bddCommande,
+                  userSeller: m.chief,
+                  commande: bddUser.find((user2) => m.chief.id === user2.id)
+                    .commandes,
                 })
               }
             >
@@ -50,9 +64,7 @@ function Meal({ navigation }) {
                 {m.part} {m.part > 1 ? 'parts' : 'part'}
               </Text>
               <Text style={styles.descriptionMeal_text}>
-                {`${m.dateLivraison.split('T')[0].split('-')[2]}/${
-                  m.dateLivraison.split('T')[0].split('-')[1]
-                }/${m.dateLivraison.split('T')[0].split('-')[0]}`}
+                {m.dateLivraison.toLocaleDateString('fr-FR')}
               </Text>
             </View>
             <TouchableHighlight
@@ -61,8 +73,9 @@ function Meal({ navigation }) {
               style={styles.button_container}
               onPress={() =>
                 navigation.navigate('Request', {
-                  user: m.chief,
-                  commande: bddCommande,
+                  userSeller: m.chief,
+                  commande: bddUser.find((user3) => m.chief.id === user3.id)
+                    .commandes,
                   plat: m,
                 })
               }

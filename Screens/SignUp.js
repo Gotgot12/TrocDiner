@@ -37,10 +37,7 @@ function SignUp({ navigation }) {
 
       fetch(requete, postOptions).then((res) => {
         if (res.status < 400) {
-          res.json().then((connect) => {
-            console.log(connect);
-            navigation.navigate('LogIn');
-          });
+          res.json().then(navigation.navigate('LogIn'));
         }
       });
     }

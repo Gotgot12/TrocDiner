@@ -4,9 +4,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Profile({ route }) {
-  const { user, commande } = route.params;
-  console.log(commande);
-  const dateNaissanceSplit = user.dateNaissance.split('T');
+  const { userSeller, commande } = route.params;
+
+  const dateNaissanceSplit = userSeller.dateNaissance.split('T');
 
   return (
     <View style={styles.main_container}>
@@ -17,7 +17,7 @@ function Profile({ route }) {
         <View style={styles.infoPerso_container}>
           <Icon name="account" size={35} color="black" />
           <Text style={styles.infoPerso_text}>
-            {user.prenom} {user.nom}
+            {userSeller.prenom} {userSeller.nom}
           </Text>
           <Text style={styles.infoPerso_text}>
             Date de naissance :{' '}
@@ -25,10 +25,12 @@ function Profile({ route }) {
               dateNaissanceSplit[0].split('-')[1]
             }/${dateNaissanceSplit[0].split('-')[0]}`}{' '}
           </Text>
-          <Text style={styles.infoPerso_text}>Adresse : {user.adresse}</Text>
-          <Text style={styles.infoPerso_text}>E-Mail : {user.email}</Text>
           <Text style={styles.infoPerso_text}>
-            Moyenne de ses notes : {user.notes}
+            Adresse : {userSeller.adresse}
+          </Text>
+          <Text style={styles.infoPerso_text}>E-Mail : {userSeller.email}</Text>
+          <Text style={styles.infoPerso_text}>
+            Moyenne de ses notes : {userSeller.notes}
           </Text>
         </View>
         <View style={styles.histoInfoPlat_container}>

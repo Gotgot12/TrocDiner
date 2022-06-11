@@ -10,9 +10,8 @@ import {
 import TopHeader from '../Components/TopHeader';
 import { UserContext } from './UserProvider';
 
-function Add({ navigation }) {
+function Add() {
   const { user } = useContext(UserContext);
-  console.log(user);
 
   const [plat, setPlat] = useState('Quiche Salade');
   const [parts, setParts] = useState('4');
@@ -25,7 +24,6 @@ function Add({ navigation }) {
     detailsCommande: description,
     dateLivraison: dateLiv,
   };
-  console.log(commande);
 
   const commander = () => {
     const headerRequest = new Headers();
@@ -44,7 +42,7 @@ function Add({ navigation }) {
 
     fetch(requete, postOptions).then((res) => {
       if (res.status < 400) {
-        res.json().then(navigation.navigate('Meal'));
+        res.json().then(document.location.reload());
       }
     });
     alert('Votre plat a bien été ajouté');

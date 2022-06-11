@@ -1,48 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      part: 1,
-    };
-  }
+function Counter({ nbrPartMax }) {
+  const [count, setCount] = useState(1);
 
-  minus = () => {
-    if (this.state.part > 1) {
-      this.setState({
-        part: this.state.part - 1,
-      });
+  const minus = () => {
+    if (count > 1) {
+      setCount(count - 1);
     }
   };
 
-  plus = () => {
-    if (this.state.part < this.props.part) {
-      this.setState({
-        part: this.state.part + 1,
-      });
+  const plus = () => {
+    if (count < nbrPartMax) {
+      setCount(count + 1);
     }
   };
 
-  render() {
-    return (
-      <View style={styles.main_container}>
-        <TouchableHighlight underlayColor="#DDDDDD" onPress={this.minus}>
-          <Icon name="minus-circle" color="#008037" size={50} />
-        </TouchableHighlight>
-        <Text style={styles.text}>{this.state.part}</Text>
-        <TouchableHighlight underlayColor="#DDDDDD" onPress={this.plus}>
-          <Icon name="plus-circle" color="#008037" size={50} />
-        </TouchableHighlight>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.counter_container}>
+      <TouchableHighlight underlayColor="#DDDDDD" onPress={() => minus()}>
+        <Icon name="minus-circle" color="#008037" size={50} />
+      </TouchableHighlight>
+      <Text style={styles.text}>{count}</Text>
+      <TouchableHighlight underlayColor="#DDDDDD" onPress={() => plus()}>
+        <Icon name="plus-circle" color="#008037" size={50} />
+      </TouchableHighlight>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  main_container: {
+  counter_container: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     flex: 1,

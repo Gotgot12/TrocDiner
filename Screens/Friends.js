@@ -7,7 +7,6 @@ import useFetchGet from '../Functions/useFetchGet';
 
 function Friends({ navigation }) {
   const bddUser = useFetchGet('http://127.0.0.1:8000/api/users');
-  console.log(bddUser);
 
   return (
     <View style={styles.global_container}>
@@ -21,7 +20,11 @@ function Friends({ navigation }) {
           <View>
             {bddUser.map((m) => (
               <View key={m.id} style={styles.card_container}>
-                <Card user={m} commande={m.commandes} navigation={navigation} />
+                <Card
+                  userSeller={m}
+                  commande={m.commandes}
+                  navigation={navigation}
+                />
               </View>
             ))}
           </View>

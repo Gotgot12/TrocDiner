@@ -14,16 +14,26 @@ import DecodeTokenJWT from '../Functions/DecodeTokenJWT';
 
 function LogIn({ navigation }) {
   const { setUser } = useContext(UserContext);
-  const [email, setEmail] = useState('gotgot-il@hotmail.fr');
+  const [email, setEmail] = useState('');
   const [mdp, setMdp] = useState('test');
 
-  const loginForm = {
-    email: email,
-    password: mdp,
-  };
-  console.log(loginForm);
-
   const login = () => {
+    if (document.cookie === '') {
+      document.cookie = `email=${email}`;
+      document.cookie = `mdp=${mdp}`;
+    }
+
+    const cArray = document.cookie.split(';');
+    const cemail = cArray[0].split('=')[1];
+    const cmdp = cArray[1].split('=')[1];
+
+    console.log(document.cookie);
+
+    const loginForm = {
+      email: cemail,
+      password: cmdp,
+    };
+
     const headerRequest = new Headers();
     headerRequest.append('Content-Type', 'application/json');
     headerRequest.append('Accept', 'application/json');
@@ -42,7 +52,7 @@ function LogIn({ navigation }) {
         res.json().then((token) => {
           const payLoadToken = DecodeTokenJWT(token.token);
           const dateNaissance = new Date(payLoadToken.dateNaissance.date);
-          console.log(dateNaissance, typeof dateNaissance);
+
           setUser({
             id: payLoadToken.id,
             email,
@@ -51,12 +61,20 @@ function LogIn({ navigation }) {
             prenom: payLoadToken.prenom,
             adresse: payLoadToken.adresse,
             dateNaissance: dateNaissance,
+            Coin: payLoadToken.coin,
           });
         });
+      } else {
+        document.cookie = 'email=;expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'mdp=;expires=Thu, 01 Jan 1970 00:00:00 UTC';
       }
     });
   };
+  if (document.cookie !== '') {
+    login();
+  }
 
+  console.log(document.cookie);
   return (
     <View style={styles.main_container}>
       <TopHeader />

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { UserContext } from '../Screens/UserProvider';
 
-function Token() {
+function Coin() {
+  const { user } = useContext(UserContext);
+
   return (
     <View style={styles.main_container}>
-      <Text style={styles.text}>Vos jetons: 1000</Text>
+      <Text style={styles.text}>Votre nombre de pièce: {user.Coin}</Text>
     </View>
   );
 }
@@ -21,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Token;
+export default Coin;

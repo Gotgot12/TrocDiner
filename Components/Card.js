@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-function Card({ user, commande, navigation }) {
+function Card({ userSeller, commande, navigation }) {
   return (
     <TouchableOpacity
       style={styles.main_container}
-      onPress={() => navigation.navigate('Profile', { user, commande })}
+      onPress={() => navigation.navigate('Profile', { userSeller, commande })}
     >
       <View style={styles.account_container}>
         <Icon name="account" size={50} color="black" />
@@ -14,12 +14,12 @@ function Card({ user, commande, navigation }) {
       <View style={styles.text_container}>
         <View style={styles.info_container}>
           <Text style={styles.names_text}>
-            {user.prenom} {user.nom}
+            {userSeller.prenom} {userSeller.nom}
           </Text>
-          <Text style={styles.location_text}>{user.adresse}</Text>
+          <Text style={styles.location_text}>{userSeller.adresse}</Text>
         </View>
         <Text style={styles.notes_text}>
-          Moyenne de ses notes : {user.notes}
+          Moyenne de ses notes : {userSeller.notes}
         </Text>
       </View>
     </TouchableOpacity>

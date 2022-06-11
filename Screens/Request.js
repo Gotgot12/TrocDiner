@@ -1,21 +1,40 @@
-import * as React from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Card from '../Components/Card';
-import Counter from '../Components/Counter';
+import { UserContext } from './UserProvider';
+import BuyRequest from '../Functions/BuyRequest';
+import Coin from '../Components/Coin';
 
 function Request({ route, navigation }) {
-  const { user, commande, plat } = route.params;
+  const { userSeller, commande, plat } = route.params;
+  const { user, setUser } = useContext(UserContext);
 
-  const dateSplit = plat.dateLivraison.split('T');
+  const [count, setCount] = useState(1);
+
+  const minus = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  const plus = () => {
+    if (count < plat.part) {
+      setCount(count + 1);
+    }
+  };
+
   return (
     <View style={styles.main_container}>
       <View style={styles.title_container}>
         <Text style={styles.title_text}>Votre commande</Text>
-        <Text style={styles.token_text}>
-          Petit rappel: Vous avez ... jetons
-        </Text>
+        <Coin />
       </View>
-      <Card user={user} commande={commande} navigation={navigation} />
+      <Card
+        userSeller={userSeller}
+        commande={commande}
+        navigation={navigation}
+      />
       <View style={styles.recap_container}>
         <View style={styles.infos_container}>
           <View style={styles.profileText_container}>
@@ -23,20 +42,32 @@ function Request({ route, navigation }) {
           </View>
           <View style={styles.dateLiv}>
             <Text style={styles.infos_text}>
-              {`${dateSplit[0].split('-')[2]}/${dateSplit[0].split('-')[1]}/${
-                dateSplit[0].split('-')[0]
-              }`}
+              {plat.dateLivraison.toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
             </Text>
             <Text style={styles.infos_text}>
-              {`${dateSplit[1].split(':')[0]}:${dateSplit[1].split(':')[1]}`}
+              {`${plat.dateLivraison.getHours()}:${`0${plat.dateLivraison.getMinutes()}`.slice(
+                -2
+              )}`}
             </Text>
           </View>
         </View>
-        <Counter part={plat.part} />
+        <View style={styles.counter_container}>
+          <TouchableHighlight underlayColor="#DDDDDD" onPress={() => minus()}>
+            <Icon name="minus-circle" color="#008037" size={50} />
+          </TouchableHighlight>
+          <Text style={styles.text}>{count}</Text>
+          <TouchableHighlight underlayColor="#DDDDDD" onPress={() => plus()}>
+            <Icon name="plus-circle" color="#008037" size={50} />
+          </TouchableHighlight>
+        </View>
         <View style={styles.addButton_container}>
           <TouchableHighlight
             style={styles.touchable_container}
-            onPress={() => alert('Votre commande a été passée !')}
+            onPress={() => BuyRequest(userSeller, user, setUser, plat, count)}
           >
             <Text style={styles.touchable_text}>COMMANDER</Text>
           </TouchableHighlight>
@@ -54,6 +85,13 @@ const styles = StyleSheet.create({
   addButton_container: {
     alignItems: 'center',
     flex: 0.7,
+  },
+
+  counter_container: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
   },
 
   dateLiv: {
@@ -105,6 +143,13 @@ const styles = StyleSheet.create({
     width: 300,
   },
 
+  text: {
+    fontFamily: 'ScopeOne',
+    fontSize: 40,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+
   title_container: {
     alignItems: 'center',
     flex: 1,
@@ -123,11 +168,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
     marginTop: 10,
-  },
-
-  token_text: {
-    fontFamily: 'OpenSansItalic',
-    fontSize: 15,
   },
 
   touchable_container: {

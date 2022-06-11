@@ -11,7 +11,7 @@ import { UserContext } from './UserProvider';
 
 function Settings() {
   const { user, setUser } = useContext(UserContext);
-
+  console.log(user);
   const [nom, setNom] = useState(user.nom);
   const [prenom, setPrenom] = useState(user.prenom);
   const [adresse, setAdresse] = useState(user.adresse);
@@ -56,10 +56,18 @@ function Settings() {
             prenom: change.prenom,
             adresse: change.adresse,
             dateNaissance: formatDate,
+            Coin: user.Coin,
           });
         });
       }
     });
+  };
+
+  const logout = () => {
+    document.cookie = 'email=;expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    document.cookie = 'mdp=;expires=Thu, 01 Jan 1970 00:00:00 UTC';
+
+    document.location.reload();
   };
   return (
     <View style={styles.global_container}>
@@ -109,6 +117,14 @@ function Settings() {
             style={styles.touch_container}
           >
             <Text style={styles.touch_text}>Modifier votre profil</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => logout()}
+            activeOpacity={0.5}
+            underlayColor="#1A4301"
+            style={styles.touch_container}
+          >
+            <Text style={styles.touch_text}>Se déconnecter</Text>
           </TouchableHighlight>
         </View>
       </View>
